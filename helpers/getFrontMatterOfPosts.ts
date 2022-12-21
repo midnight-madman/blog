@@ -1,13 +1,13 @@
-import {readdirSync, readFileSync} from 'fs';
+import {readFileSync} from 'fs';
 import matter from 'gray-matter';
 import {join} from 'path';
 import {PostFrontMatter} from '../types';
-import {filter, includes, replace} from 'lodash';
+import {replace} from 'lodash';
+import {getPostFilenames} from "../scripts/utils";
 
 export async function getFrontMatterOfPosts(): Promise<PostFrontMatter[]> {
     // Get blog post file names
-    let fileNames = readdirSync(join(process.cwd(), 'posts'));
-    fileNames = filter(fileNames, (fileName: string) => includes(fileName, '.md'))
+    const fileNames = getPostFilenames()
     // Create list with front matter of all blog post
     const allPosts: PostFrontMatter[] = await Promise.all(
         fileNames.map(async (fileName) => {

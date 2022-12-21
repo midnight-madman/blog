@@ -2,8 +2,7 @@ import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useEffect, useMemo, useRef, useState} from 'react';
-import {trackAnalyticsPageview} from '../helpers/trackAnalyticsPageview';
+import {useEffect, useState} from 'react';
 import {GitHubIcon, ThemeIcon} from '../icons';
 import 'tailwindcss/tailwind.css';
 import '../styles/font.css';
@@ -15,16 +14,14 @@ function MyApp({Component, pageProps}: AppProps) {
 
     // Create theme and background state
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
-    const gradientElementRef = useRef<HTMLDivElement>(null);
-    const opacityElementRef = useRef<HTMLDivElement>(null);
 
-    // Track Analytics pageviews when route changes
-    useEffect(() => {
-        router.events.on('routeChangeComplete', trackAnalyticsPageview);
-        return () => {
-            router.events.off('routeChangeComplete', trackAnalyticsPageview);
-        };
-    }, [router.events]);
+    // // Track Analytics pageviews when route changes
+    // useEffect(() => {
+    //     router.events.on('routeChangeComplete', trackAnalyticsPageview);
+    //     return () => {
+    //         router.events.off('routeChangeComplete', trackAnalyticsPageview);
+    //     };
+    // }, [router.events]);
 
     // Set initial theme based on user's prefers color scheme
     useEffect(() => {
@@ -44,80 +41,34 @@ function MyApp({Component, pageProps}: AppProps) {
         }
     }, [theme]);
 
-    /**
-     * It randomly updates the page background.
-     */
-        // const updateBackground = () => {
-        //     const {scrollHeight} = document.documentElement;
-        //     const sectionHeight = 700;
-        //     const colors = ['#4BB04F', '#90D7FF', '#FF9F1C'];
-        //     const startSide = Math.round(Math.random());
-        //     const nextBackground = [];
-        //     for (let i = 0; i < scrollHeight / sectionHeight; i++) {
-        //         const left =
-        //             (i + startSide) % 2 ? 15 : 85 + Math.floor(Math.random() * 12 - 6);
-        //         const top = i * sectionHeight + sectionHeight / 2;
-        //         const color = colors[Math.floor(Math.random() * colors.length)];
-        //         nextBackground.push(
-        //             `radial-gradient(circle at ${left}% ${top}px, ${color}, ${color}00 500px)`
-        //         );
-        //     }
-        //     gradientElementRef.current!.style.background = nextBackground.join(', ');
-        // };
+    // Create background color depending on theme
+    // const bgColor = useMemo(
+    //     () => (theme === 'light' ? '#ffffff' : '#000000'),
+    //     [theme]
+    // );
 
-        // Set initial background and update it when path or window size change
-        // useEffect(updateBackground, [router.asPath]);
-        // useEffect(() => window.addEventListener('resize', updateBackground), []);
 
-        // Animate background opacity with 2 FPS to reduce GPU load
-        // useEffect(() => {
-        //     const fps = 10;
-        //     let opacity = 1;
-        //     let direction = 1;
-        //     setInterval(() => {
-        //         opacity += direction * (0.1 / fps);
-        //         if (opacity < 0 || opacity > 1) {
-        //             direction *= -1;
-        //         } else {
-        //             opacityElementRef.current!.style.opacity = opacity.toString();
-        //         }
-        //     }, 1000 / fps);
-        // }, []);
-
-        // Create background color depending on theme
-    const bgColor = useMemo(
-            () => (theme === 'light' ? '#ffffff' : '#000000'),
-            [theme]
-        );
+    const isIndexPage = router.asPath === '/';
 
     return <>
         <Head>
-            <meta name="theme-color" content={bgColor}/>
-            <meta name="msapplication-TileColor" content={bgColor}/>
+            {/*<meta name="theme-color" content={bgColor}/>*/}
+            {/*<meta name="msapplication-TileColor" content={bgColor}/>*/}
         </Head>
         <div className={classNames(
-            router.asPath === '/' ? 'via-slate-200 to-sky-200 dark:via-slate-800 dark:to-sky-800' : '',
+            isIndexPage ? 'via-slate-200 to-sky-200 dark:via-slate-800 dark:to-sky-800' : '',
             "relative bg-gradient-to-br from-slate-200 dark:from-slate-900 "
         )}>
-            <div
-                className="w-full h-full absolute z-[-1] top-0 left-0"
-                ref={opacityElementRef}
-            >
-                <div
-                    className="w-full h-full opacity-10 dark:opacity-[.15]"
-                    ref={gradientElementRef}
-                />
-            </div>
             <header
                 className="w-full fixed z-20 top-0 left-0 bg-slate-100 dark:bg-slate-900 bg-opacity-60 dark:bg-opacity-60 backdrop-blur p-4 md:p-5 lg:py-6 lg:px-10">
                 <nav className="flex justify-between">
                     <Link
                         href="/"
-                        className="prevent-default max-w-[45%] p-3 -m-3 text-base sm:text-lg lg:text-xl text-gray-800 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100 font-semibold transition-colors whitespace-nowrap overflow-hidden text-ellipsis">
+                        className="prevent-default max-w-[45%] p-3 -m-3 text-base sm:text-lg lg:text-xl text-gray-800 hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100 font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
                         Midnight Madman
                     </Link>
                     <div
-                        className="flex items-center space-x-3 sm:space-x-6 md:space-x-8 lg:space-x-10 text-gray-600 dark:text-gray-400 transition-colors">
+                        className="flex items-center space-x-3 sm:space-x-6 md:space-x-8 lg:space-x-10 text-gray-600 dark:text-gray-400">
                         <a
                             className="prevent-default p-3 -m-3 text-base lg:text-lg hover:text-gray-800 dark:hover:text-gray-200"
                             href="/rss.xml"
@@ -129,7 +80,10 @@ function MyApp({Component, pageProps}: AppProps) {
 
                         <button
                             className="w-4 lg:w-5 h-4 lg:h-5 box-content p-3 -m-3 hover:text-gray-800 dark:hover:text-gray-200"
-                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setTheme(theme === 'dark' ? 'light' : 'dark')
+                            }}
                             type="button"
                         >
                             <ThemeIcon/>

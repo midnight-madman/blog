@@ -60,33 +60,12 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
             </div>
 
             <p className="mt-6 md:mt-8 lg:mt-10">I am Midnight Madman.</p>
-            {/*<p>*/}
-            {/*  I was founding team &amp; CTO of{' '}*/}
-            {/*  <a href="https://www.producthunt.com" target="_blank" rel="noreferrer">*/}
-            {/*    Product Hunt*/}
-            {/*  </a>*/}
-            {/*  , VPE of{' '}*/}
-            {/*  <a href="https://www.coinlist.co" target="_blank" rel="noreferrer">*/}
-            {/*    CoinList*/}
-            {/*  </a>*/}
-            {/*  , Head of Remote at{' '}*/}
-            {/*  <a href="https://www.angellist.com" target="_blank" rel="noreferrer">*/}
-            {/*    AngelList*/}
-            {/*  </a>*/}
-            {/*  , and currently I work as CTO at{' '}*/}
-            {/*  <a href="https://www.beondeck.com">On Deck</a>.*/}
-            {/*</p>*/}
-            {/*<p>*/}
-            {/*  I also angel invest via{' '}*/}
-            {/*  <a*/}
-            {/*    href="https://www.remotefirstcapital.com"*/}
-            {/*    target="_blank"*/}
-            {/*    rel="noreferrer"*/}
-            {/*  >*/}
-            {/*    Remote First Capital*/}
-            {/*  </a>*/}
-            {/*  .*/}
-            {/*</p>*/}
+            <p>
+              I am currently building{' '}
+              <a href="https://www.loopie.site" target="_blank" rel="noreferrer">
+                🍩 Loopie
+              </a>
+            </p>
 
             {/*<p>*/}
             {/*  I was lucky to learn from{' '}*/}
@@ -128,11 +107,12 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
             </ul>
             <p>
                 <small>
-                    PS: If you find typos or got ideas how to improve articles, feel free
+                    If you find typos or got ideas how to improve articles,<br />
+                    feel free
                     to open{' '}
                     <a href="https://github.com/midnight-madman/blog">
-                        issues or pull requests here.
-                    </a>
+                        issues or pull requests here
+                    </a> :)
                 </small>
             </p>
 

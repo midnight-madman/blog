@@ -1,4 +1,4 @@
-import {existsSync, readdirSync, readFileSync} from 'fs';
+import {existsSync, readFileSync} from 'fs';
 import {GetStaticProps, NextPage} from 'next';
 import {bundleMDX} from 'mdx-bundler';
 import {getMDXComponent} from 'mdx-bundler/client';
@@ -7,19 +7,20 @@ import {useMemo} from 'react';
 import getReadingTime from 'reading-time';
 import {Head, PostImage} from '../../components';
 import {Post, PostFrontMatter} from '../../types';
+import {getPostFilenames} from "../../scripts/utils";
 
 // Build time Node.js code
 export async function getStaticPaths() {
     // Get blog post file names
-    const fileNames = readdirSync(join(process.cwd(), 'posts'));
+    const fileNames = getPostFilenames()
+    const paths = fileNames.map((fileName) => ({
+        params: {
+            slug: fileName.replace(/.md[x]?$/gi, ''),
+        },
+    }))
 
-    // Retun path of every blog post
     return {
-        paths: fileNames.map((fileName) => ({
-            params: {
-                slug: fileName.replace(/.md[x]?$/gi, ''),
-            },
-        })),
+        paths,
         fallback: false,
     };
 }
@@ -37,7 +38,6 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     const slug = params!.slug as string;
 
     let filePath = join(process.cwd(), 'posts', `${slug}.md`);
-    console.log('filePath', filePath)
     if (!existsSync(filePath)) {
         filePath = join(process.cwd(), 'posts', `${slug}.mdx`)
     }
