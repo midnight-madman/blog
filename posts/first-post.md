@@ -2,6 +2,7 @@
 title: 'Hello 👋🏼 first post'
 publishedAt: '2022-12-21'
 summary: 'Setting up another blog, will it stick around this time?'
+tag: '🚀 Popular'
 ---
 
 # Setting up another blog, will it stick around?

@@ -27,13 +27,13 @@ function MyApp({Component, pageProps}: AppProps) {
     }, [router.events]);
 
     // Set initial theme based on user's prefers color scheme
-    // useEffect(() => {
-    //     setTheme(
-    //         window?.matchMedia('(prefers-color-scheme: dark)').matches
-    //             ? 'dark'
-    //             : 'light'
-    //     );
-    // }, []);
+    useEffect(() => {
+        setTheme(
+            window?.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+        );
+    }, []);
 
     // Add or remove dark class when theme changes
     useEffect(() => {
