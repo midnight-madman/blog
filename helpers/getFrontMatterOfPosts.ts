@@ -2,7 +2,7 @@ import {readdirSync, readFileSync} from 'fs';
 import matter from 'gray-matter';
 import {join} from 'path';
 import {PostFrontMatter} from '../types';
-import {filter, includes} from 'lodash';
+import {filter, includes, replace} from 'lodash';
 
 export async function getFrontMatterOfPosts(): Promise<PostFrontMatter[]> {
     // Get blog post file names
@@ -12,13 +12,12 @@ export async function getFrontMatterOfPosts(): Promise<PostFrontMatter[]> {
     const allPosts: PostFrontMatter[] = await Promise.all(
         fileNames.map(async (fileName) => {
             const filePath = join(process.cwd(), 'posts', fileName);
-            console.log('filePath', filePath)
             const fileData = readFileSync(filePath, 'utf8');
             const frontMatter = matter(fileData).data as Pick<
                 PostFrontMatter,
                 'title' | 'summary' | 'publishedAt'
             >;
-            const slug = fileName.replace('.mdx', '');
+            const slug = replace(fileName, /.md[x]?$/gi, '');
             return {...frontMatter, slug};
         })
     );

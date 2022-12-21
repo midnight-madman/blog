@@ -1,4 +1,4 @@
-import {readdirSync, readFileSync} from 'fs';
+import {existsSync, readdirSync, readFileSync} from 'fs';
 import {GetStaticProps, NextPage} from 'next';
 import {bundleMDX} from 'mdx-bundler';
 import {getMDXComponent} from 'mdx-bundler/client';
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
     return {
         paths: fileNames.map((fileName) => ({
             params: {
-                slug: fileName.replace(/\.mdx/, ''),
+                slug: fileName.replace(/.md[x]?$/gi, ''),
             },
         })),
         fallback: false,
@@ -32,11 +32,17 @@ interface PostPageProps {
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
                                                                         params,
                                                                     }) => {
+    console.log('getStaticProps')
     // Get slug of post from params
     const slug = params!.slug as string;
 
+    let filePath = join(process.cwd(), 'posts', `${slug}.md`);
+    console.log('filePath', filePath)
+    if (!existsSync(filePath)) {
+        filePath = join(process.cwd(), 'posts', `${slug}.mdx`)
+    }
+
     // Read and bundle MDX source code
-    const filePath = join(process.cwd(), 'posts', `${slug}.mdx`);
     const mdxSource = readFileSync(filePath, 'utf8');
     const bundleResult = await bundleMDX({source: mdxSource});
 
@@ -84,7 +90,7 @@ const PostPage: NextPage<PostPageProps> = ({post}) => {
     const BlogPost = useMemo(() => getMDXComponent(sourceCode), [sourceCode]);
 
     return (
-        <>
+        <div className="min-h-screen">
             <Head title={`${title} | Midnight Madman`} description={summary}/>
 
             <article>
@@ -100,7 +106,7 @@ const PostPage: NextPage<PostPageProps> = ({post}) => {
         */}
                 <BlogPost components={{Image: PostImage as any}}/>
             </article>
-        </>
+        </div>
     );
 };
 
