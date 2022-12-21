@@ -8,6 +8,7 @@ import {GitHubIcon, ThemeIcon} from '../icons';
 import 'tailwindcss/tailwind.css';
 import '../styles/font.css';
 import '../styles/global.css';
+import {classNames} from '../scripts/utils';
 
 function MyApp({Component, pageProps}: AppProps) {
     const router = useRouter();
@@ -46,55 +47,58 @@ function MyApp({Component, pageProps}: AppProps) {
     /**
      * It randomly updates the page background.
      */
-    const updateBackground = () => {
-        const {scrollHeight} = document.documentElement;
-        const sectionHeight = 700;
-        const colors = ['#4BB04F', '#90D7FF', '#FF9F1C'];
-        const startSide = Math.round(Math.random());
-        const nextBackground = [];
-        for (let i = 0; i < scrollHeight / sectionHeight; i++) {
-            const left =
-                (i + startSide) % 2 ? 15 : 85 + Math.floor(Math.random() * 12 - 6);
-            const top = i * sectionHeight + sectionHeight / 2;
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            nextBackground.push(
-                `radial-gradient(circle at ${left}% ${top}px, ${color}, ${color}00 500px)`
-            );
-        }
-        gradientElementRef.current!.style.background = nextBackground.join(', ');
-    };
+        // const updateBackground = () => {
+        //     const {scrollHeight} = document.documentElement;
+        //     const sectionHeight = 700;
+        //     const colors = ['#4BB04F', '#90D7FF', '#FF9F1C'];
+        //     const startSide = Math.round(Math.random());
+        //     const nextBackground = [];
+        //     for (let i = 0; i < scrollHeight / sectionHeight; i++) {
+        //         const left =
+        //             (i + startSide) % 2 ? 15 : 85 + Math.floor(Math.random() * 12 - 6);
+        //         const top = i * sectionHeight + sectionHeight / 2;
+        //         const color = colors[Math.floor(Math.random() * colors.length)];
+        //         nextBackground.push(
+        //             `radial-gradient(circle at ${left}% ${top}px, ${color}, ${color}00 500px)`
+        //         );
+        //     }
+        //     gradientElementRef.current!.style.background = nextBackground.join(', ');
+        // };
 
-    // Set initial background and update it when path or window size change
-    useEffect(updateBackground, [router.asPath]);
-    useEffect(() => window.addEventListener('resize', updateBackground), []);
+        // Set initial background and update it when path or window size change
+        // useEffect(updateBackground, [router.asPath]);
+        // useEffect(() => window.addEventListener('resize', updateBackground), []);
 
-    // Animate background opacity with 2 FPS to reduce GPU load
-    useEffect(() => {
-        const fps = 2;
-        let opacity = 1;
-        let direction = 1;
-        setInterval(() => {
-            opacity += direction * (0.1 / fps);
-            if (opacity < 0 || opacity > 1) {
-                direction *= -1;
-            } else {
-                opacityElementRef.current!.style.opacity = opacity.toString();
-            }
-        }, 1000 / fps);
-    }, []);
+        // Animate background opacity with 2 FPS to reduce GPU load
+        // useEffect(() => {
+        //     const fps = 10;
+        //     let opacity = 1;
+        //     let direction = 1;
+        //     setInterval(() => {
+        //         opacity += direction * (0.1 / fps);
+        //         if (opacity < 0 || opacity > 1) {
+        //             direction *= -1;
+        //         } else {
+        //             opacityElementRef.current!.style.opacity = opacity.toString();
+        //         }
+        //     }, 1000 / fps);
+        // }, []);
 
-    // Create background color depending on theme
+        // Create background color depending on theme
     const bgColor = useMemo(
-        () => (theme === 'light' ? '#ffffff' : '#000000'),
-        [theme]
-    );
+            () => (theme === 'light' ? '#ffffff' : '#000000'),
+            [theme]
+        );
 
     return <>
         <Head>
             <meta name="theme-color" content={bgColor}/>
             <meta name="msapplication-TileColor" content={bgColor}/>
         </Head>
-        <div className="relative">
+        <div className={classNames(
+            router.asPath === '/' ? 'via-slate-200 to-sky-200 dark:via-slate-800 dark:to-sky-800' : '',
+            "relative bg-gradient-to-br from-slate-200 dark:from-slate-900 "
+        )}>
             <div
                 className="w-full h-full absolute z-[-1] top-0 left-0"
                 ref={opacityElementRef}
@@ -105,7 +109,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 />
             </div>
             <header
-                className="w-full fixed z-20 top-0 left-0 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 backdrop-blur p-4 md:p-5 lg:py-6 lg:px-10">
+                className="w-full fixed z-20 top-0 left-0 bg-slate-100 dark:bg-slate-900 bg-opacity-60 dark:bg-opacity-60 backdrop-blur p-4 md:p-5 lg:py-6 lg:px-10">
                 <nav className="flex justify-between">
                     <Link
                         href="/"

@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     // Genearte RSS feed and add it to public directory
     generateRssFeed(
         {
-            title: 'Blog posts by Midnight Madman',
+            title: 'Posts by Midnight Madman',
             description: '',
         },
         posts
@@ -43,7 +43,7 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
     );
 
     return (
-        <>
+        <div className="">
             <Head
                 title="Midnight Madman Blog"
                 description="notes &amp; thoughts."
@@ -59,7 +59,7 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
                 <h1>Hey! ✌️</h1>
             </div>
 
-            <p className="mt-6 md:mt-8 lg:mt-10">My name is Midnight Madman.</p>
+            <p className="mt-6 md:mt-8 lg:mt-10">I am Midnight Madman.</p>
             {/*<p>*/}
             {/*  I was founding team &amp; CTO of{' '}*/}
             {/*  <a href="https://www.producthunt.com" target="_blank" rel="noreferrer">*/}
@@ -151,7 +151,7 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
                     The post you are looking for does not exist yet. 😬
                 </p>
             )}
-        </>
+        </div>
     );
 };
 
