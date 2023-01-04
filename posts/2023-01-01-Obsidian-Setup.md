@@ -47,9 +47,9 @@ Obsidian is great right after installation. I didn't want to waste time to fine-
 
 
 # Daily Note Template
-![[2023-01-01-Daily-Template.png]]
+!()[2023-01-01-Daily-Template.png]
 
-![[2023-01-01-Evening-Journaling.png]]
+!()[2023-01-01-Evening-Journaling.png]
 
 Here is the raw text you can copy and adapt:
 ```
@@ -91,7 +91,7 @@ Every hindrance became a chance to adapt. Setbacks provide valuable lessons.
 
 I want to visually see streaks and breaks in positive daily habits I'm tracking. The usual paid apps on iOS bring little value for my goals. I created a simple habit tracker based on the above daily template. This is the most straightforward solution I could find.
 
-![[Screenshot 2023-01-04 at 17.26.01.png]]
+!()[Screenshot 2023-01-04 at 17.26.01.png]
 Dataview creates a running list of my daily habit entries from the current month.
 
 The dataview snippet to create it is:
