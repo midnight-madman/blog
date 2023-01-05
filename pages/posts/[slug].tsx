@@ -3,7 +3,7 @@ import {GetStaticProps, NextPage} from 'next';
 import {bundleMDX} from 'mdx-bundler';
 import {getMDXComponent} from 'mdx-bundler/client';
 import {join} from 'path';
-import {useMemo} from 'react';
+import React, {useMemo} from 'react';
 import getReadingTime from 'reading-time';
 import {Head, PostImage} from '../../components';
 import {Post, PostFrontMatter} from '../../types';
@@ -33,7 +33,6 @@ interface PostPageProps {
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
                                                                         params,
                                                                     }) => {
-    console.log('getStaticProps')
     // Get slug of post from params
     const slug = params!.slug as string;
 
@@ -55,7 +54,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     const readingTimeResult = getReadingTime(mdxSource);
     const wordCount = readingTimeResult.words;
     const readingTime = readingTimeResult.text;
-
+    // console.log(mdxSource)
     // Return page props
     return {
         props: {
@@ -104,7 +103,7 @@ const PostPage: NextPage<PostPageProps> = ({post}) => {
         "mdx-bundler", but it is included by default in the "FC" type of React,
         I cast PostImage to "any". In the future, this may be removed again.
         */}
-                <BlogPost components={{Image: PostImage as any}}/>
+                <BlogPost components={{img: PostImage, Image: PostImage}}/>
             </article>
         </div>
     );

@@ -12,10 +12,10 @@
     "export": "next export"
   },
   "dependencies": {
-    "esbuild": "^0.14.0",
+    "esbuild": "^0.16.14",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
-    "mdx-bundler": "^9.0.1",
+    "mdx-bundler": "^9.2.1",
     "next": "^13.0.7",
     "preact": "^10.11.3",
     "react": "^18.2.0",

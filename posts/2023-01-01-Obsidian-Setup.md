@@ -4,11 +4,9 @@ publishedAt: '2023-01-05'
 summary: 'Short overview of my Obsidian setup after my first four weeks of daily use'
 tag: '🚀 Popular'
 ---
+# Overview
 
-# My Obsidian Beginner Setup
-## Overview
-
-I started to use [Obsidian](https://obsidian.md) a month ago with my first 170 word note. I've kept a daily routine for most of the last six weeks. 
+This is a recap how I began my [Obsidian](https://obsidian.md) journey. I started using Obsidian last month with my first 170 word note. I've kept a daily routine for most of the last six weeks.
 
 ## Where am I coming from
 Skip this if you don't care about the historical migration of my notes. I understand.
