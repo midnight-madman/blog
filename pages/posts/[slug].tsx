@@ -8,6 +8,8 @@ import getReadingTime from 'reading-time';
 import {Head, PostImage} from '../../components';
 import {Post, PostFrontMatter} from '../../types';
 import {getPostFilenames} from "../../scripts/utils";
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github.css';
 
 // Build time Node.js code
 export async function getStaticPaths() {
@@ -29,6 +31,7 @@ interface PostPageProps {
     post: Post;
 }
 
+
 // Build time Node.js code
 export const getStaticProps: GetStaticProps<PostPageProps> = async ({
                                                                         params,
@@ -43,8 +46,17 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
 
     // Read and bundle MDX source code
     const mdxSource = readFileSync(filePath, 'utf8');
-    const bundleResult = await bundleMDX({source: mdxSource});
-
+    const bundleResult = await bundleMDX({
+        source: mdxSource,
+        mdxOptions(options, frontmatter) {
+            // this is the recommended way to add custom remark/rehype plugins:
+            // The syntax might look weird, but it protects you in case we add/remove
+            // plugins in the future.
+            // options.remarkPlugins = [...(options.remarkPlugins ?? []), myRemarkPlugin]
+            options.rehypePlugins = [...(options.rehypePlugins ?? []), [rehypeHighlight, {ignoreMissing: true}]]
+            return options
+        },
+    });
     // Create necessary post data for client
     const sourceCode = bundleResult.code;
     const frontMatter = bundleResult.frontmatter as Pick<
