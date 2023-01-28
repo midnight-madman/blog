@@ -18,10 +18,10 @@ h4 {
   @apply font-bold;
 }
 p {
-  @apply text-lg lg:text-xl text-gray-800 dark:text-gray-200 leading-normal;
+  @apply text-lg lg:text-xl text-gray-700 dark:text-gray-300 leading-loose tracking-normal;
 }
 strong {
-  @apply text-gray-800 dark:text-gray-200 font-bold;
+  @apply text-gray-800 dark:text-gray-200 font-semibold tracking-tight;
 }
 
 /* Blockquotes */

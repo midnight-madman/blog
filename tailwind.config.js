@@ -12,15 +12,15 @@ module.exports = {
                 md: '1.25rem',
                 lg: '1.5rem',
             },
-            // screens: {
-            //     DEFAULT: '100%',
-            //     sm: '100%',
-            //     md: '768px',
-            // },
+            screens: {
+                DEFAULT: '100%',
+                sm: '100%',
+                md: '768px',
+            },
         },
         extend: {
             fontFamily: {
-                sans: ['Nunito Sans', ...fontFamily.sans],
+                sans: ['Helvetica Neue', ...fontFamily.sans],
             },
             colors: {
                 gray: colors.slate,
