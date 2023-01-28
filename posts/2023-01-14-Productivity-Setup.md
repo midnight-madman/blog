@@ -22,7 +22,7 @@ In a usual work day I write code, have video calls, write emails and prepare doc
 	- I don't even have the chance to override all steps below and start doom scrolling
 - Start music
 	- Brain.fm or
-	- Spotify Playlist with <10 songs (usually in private mode so it doesn't mess up my other music recommendations)
+	- Spotify Playlist with < 10 songs (usually in private mode so it doesn't mess up my other music recommendations)
 - Block additional websites
 	- I'm using [SelfControl.app](https://selfcontrolapp.com/) and there is a range of similar apps
 	- This is useful for me to block social media and other websites that are sometimes required for work and communications, but can be distracting if everything else is blocked

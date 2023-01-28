@@ -36,10 +36,9 @@ productive environment.
 - Create first folder structure based on the [PARA-Method](https://www.lucapallotta.com/para/)
 - Link [Readwise](https://readwise.io/) highlights into Resources (see Plugins below)
 - Create daily template and use it
-- Ongoing: fine-tune templates and create new topics and links between them whenever I stumble upon it
-    - No additional
+- Ongoing: fine-tune templates and create new topics and links between them whenever I stumble upon them
 
-# Plugins
+## Plugins
 
 Obsidian is great right after installation. I didn't want to waste time to fine-tune, so installed the Minimal theme and
 these four plugins:
@@ -57,7 +56,7 @@ these four plugins:
 - [Dataview](https://github.com/blacksmithgu/obsidian-dataview)
     - Pull data from notes into structure tables, see example of Habit Tracking below
 
-# Daily Note Template
+## Daily Note Template
 
 ![](2023-01-01-Daily-Template.png)
 
@@ -100,7 +99,7 @@ Every hindrance became a chance to adapt. Setbacks provide valuable lessons.
 
 ```
 
-# Habit Tracking
+## Habit Tracking
 
 I want to visually see streaks and breaks in positive daily habits I'm tracking. The usual paid apps on iOS bring little
 value for my goals. I created a simple habit tracker based on the above daily template. This is the most straightforward
@@ -111,6 +110,7 @@ Dataview creates a running list of my daily habit entries from the current month
 
 The dataview snippet to create it is:
 
+``````
 ```dataview
 TABLE
 choice(habits.meditate & !contains(["0", "no"], habits.meditate), "✅ (" + habits.meditate + ")", "❌") AS "Meditate 🧘🏽‍♂️",
@@ -120,3 +120,4 @@ FROM "Journal" and #journal
 WHERE file.name != "Daily Template" AND date(file.name) > date("2022-12-24")
 SORT date(file.name) DESC
 ```
+``````

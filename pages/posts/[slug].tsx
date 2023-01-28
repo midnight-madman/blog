@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({
     const mdxSource = readFileSync(filePath, 'utf8');
     const bundleResult = await bundleMDX({
         source: mdxSource,
+        // eslint-disable-next-line no-unused-vars
         mdxOptions(options, frontmatter) {
             // this is the recommended way to add custom remark/rehype plugins:
             // The syntax might look weird, but it protects you in case we add/remove
@@ -105,8 +106,8 @@ const PostPage: NextPage<PostPageProps> = ({post}) => {
             <Head title={`${title} | Midnight Madman`} description={summary}/>
 
             <article>
-                <h1>{title}</h1>
-                <p className="text-base lg:text-lg mt-4 md:mt-6 lg:mt-8 mb-12 md:mb-20 lg:mb-24">
+                <h1 className="text-3xl font-bold tracking-tight text-black md:text-5xl">{title}</h1>
+                <p className="lg:text-lg mt-4 md:mt-4">
                     {publishedAt} · {readingTime}
                 </p>
 

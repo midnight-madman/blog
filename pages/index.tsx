@@ -1,3 +1,4 @@
+import {filter, includes} from 'lodash';
 import {GetStaticProps, NextPage} from 'next';
 import {useMemo, useState} from 'react';
 import {Head, Image, PostList} from '../components';
@@ -13,8 +14,8 @@ interface HomePageProps {
 // Build time Node.js code
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     // Create list with all blog post
-    const posts = await getFrontMatterOfPosts();
-
+    let posts = await getFrontMatterOfPosts();
+    posts = filter(posts, post => !includes(['Page'], post.tag))
     // Genearte RSS feed and add it to public directory
     generateRssFeed(
         {
@@ -48,7 +49,6 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
                 title="Midnight Madman Blog"
                 description="notes &amp; thoughts."
             />
-
             <div className="flex items-center space-x-4 md:space-x-5 lg:space-x-6">
                 <Image
                     className="prevent-default w-8 md:w-10 lg:w-12 h-8 md:h-10 lg:h-12 rounded-full"
@@ -58,15 +58,13 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
                 />
                 <h1>Hey! ✌️</h1>
             </div>
-
             <p className="mt-6 md:mt-8 lg:mt-10">I am Midnight Madman.</p>
             <p>
-              I am currently building{' '}
-              <a href="https://www.loopie.site" target="_blank" rel="noreferrer">
-                🍩 Loopie
-              </a>
+                I am currently building{' '}
+                <a href="https://www.loopie.site" target="_blank" rel="noreferrer">
+                    🍩 Loopie
+                </a> and some other things
             </p>
-
             {/*<p>*/}
             {/*  I was lucky to learn from{' '}*/}
             {/*  <Link href="/posts/🙏">*/}
@@ -107,7 +105,7 @@ const HomePage: NextPage<HomePageProps> = ({posts}) => {
             </ul>
             <p>
                 <small>
-                    If you find typos or got ideas how to improve articles,<br />
+                    If you find typos or got ideas how to improve articles,<br/>
                     feel free
                     to open{' '}
                     <a href="https://github.com/midnight-madman/blog">

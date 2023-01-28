@@ -41,13 +41,6 @@ function MyApp({Component, pageProps}: AppProps) {
         }
     }, [theme]);
 
-    // Create background color depending on theme
-    // const bgColor = useMemo(
-    //     () => (theme === 'light' ? '#ffffff' : '#000000'),
-    //     [theme]
-    // );
-
-
     const isIndexPage = router.asPath === '/';
 
     return <>
@@ -56,11 +49,11 @@ function MyApp({Component, pageProps}: AppProps) {
             {/*<meta name="msapplication-TileColor" content={bgColor}/>*/}
         </Head>
         <div className={classNames(
-            isIndexPage ? 'via-slate-200 to-sky-200 dark:via-slate-800 dark:to-sky-800' : '',
-            "relative bg-gradient-to-br from-slate-200 dark:from-slate-900 "
+            isIndexPage ? 'via-slate-100 to-sky-100 dark:via-slate-800 dark:to-sky-900' : '',
+            "relative bg-gradient-to-b from-slate-100 dark:from-slate-800 "
         )}>
             <header
-                className="w-full fixed z-20 top-0 left-0 bg-slate-100 dark:bg-slate-900 bg-opacity-60 dark:bg-opacity-60 backdrop-blur p-4 md:p-5 lg:py-6 lg:px-10">
+                className="w-full fixed z-20 top-0 left-0 bg-slate-100 dark:bg-slate-800 bg-opacity-60 dark:bg-opacity-60 backdrop-blur p-4 md:p-5 lg:py-6 lg:px-10">
                 <nav className="flex justify-between">
                     <Link
                         href="/"
